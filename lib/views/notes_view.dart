@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/notes_list_view.dart';
 import 'widgets/search_button.dart';
 
 class NotesView extends StatelessWidget {
@@ -16,6 +17,7 @@ class NotesView extends StatelessWidget {
           SearchButton(),
         ],
       ),
+      body: const NotesListView(),
     );
   }
 }
