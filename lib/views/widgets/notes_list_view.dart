@@ -6,10 +6,11 @@ class NotesListView extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return ListView.builder(
+    return ListView.separated(
       padding: const EdgeInsets.all(16),
-      itemCount: 1,
+      itemCount: 10,
       itemBuilder: (context, index) => const NoteTile(),
+      separatorBuilder: (context, index) => const SizedBox(height: 8),
     );
   }
 }

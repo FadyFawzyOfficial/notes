@@ -13,43 +13,43 @@ class NoteTile extends StatelessWidget {
           Radius.circular(16),
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          ListTile(
-            contentPadding: const EdgeInsets.all(16),
-            title: const Text('Flutter tips'),
-            titleTextStyle: const TextStyle(
-              color: Colors.black,
-              fontSize: 24,
-            ),
-            subtitle: const Padding(
-              padding: EdgeInsets.only(top: 16),
-              child: Text(
-                'Build your career with Fady Fawzy',
-                style: TextStyle(
-                  color: Colors.black45,
-                  fontSize: 20,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: const Text('Flutter tips'),
+              titleTextStyle: const TextStyle(
+                color: Colors.black,
+                fontSize: 24,
+              ),
+              subtitle: const Padding(
+                padding: EdgeInsets.symmetric(vertical: 16),
+                child: Text(
+                  'Build your career with Fady Fawzy',
+                  style: TextStyle(
+                    color: Colors.black45,
+                    fontSize: 20,
+                  ),
                 ),
               ),
-            ),
-            trailing: IconButton(
-              icon: const Icon(
-                Icons.delete_rounded,
-                color: Colors.black,
-                size: 32,
+              trailing: IconButton(
+                icon: const Icon(
+                  Icons.delete_rounded,
+                  color: Colors.black,
+                  size: 32,
+                ),
+                onPressed: () {},
               ),
-              onPressed: () {},
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(right: 16, bottom: 16),
-            child: Text(
+            Text(
               'Nov 16, 2023',
               style: TextStyle(color: Colors.black45),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
