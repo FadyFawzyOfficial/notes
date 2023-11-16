@@ -6,5 +6,10 @@ class App extends StatelessWidget {
   const App({super.key});
 
   @override
-  Widget build(context) => const MaterialApp();
+  Widget build(context) {
+    return MaterialApp(
+      theme: ThemeData(brightness: Brightness.dark),
+      home: const Scaffold(),
+    );
+  }
 }
