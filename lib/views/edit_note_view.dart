@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'widgets/app_bar_button.dart';
+import 'widgets/note_form.dart';
 
 class EditNoteView extends StatelessWidget {
   const EditNoteView({super.key});
@@ -16,6 +17,10 @@ class EditNoteView extends StatelessWidget {
             onPressed: () {},
           ),
         ],
+      ),
+      body: const Padding(
+        padding: EdgeInsets.all(16),
+        child: NoteForm(),
       ),
     );
   }
