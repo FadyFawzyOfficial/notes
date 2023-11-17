@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/app_bar_button.dart';
 import 'widgets/notes_fab.dart';
 import 'widgets/notes_list_view.dart';
-import 'widgets/search_button.dart';
 
 class NotesView extends StatelessWidget {
   const NotesView({super.key});
@@ -11,10 +11,13 @@ class NotesView extends StatelessWidget {
   Widget build(context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
         title: const Text('Notes'),
-        actions: const [SearchButton()],
+        actions: [
+          AppBarButton(
+            icon: const Icon(Icons.search_rounded),
+            onPressed: () {},
+          )
+        ],
       ),
       body: const NotesListView(),
       floatingActionButton: const NotesFab(),

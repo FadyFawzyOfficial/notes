@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 
-class SearchButton extends StatelessWidget {
-  const SearchButton({super.key});
+class AppBarButton extends StatelessWidget {
+  final Icon icon;
+  final VoidCallback onPressed;
+
+  const AppBarButton({
+    super.key,
+    required this.icon,
+    required this.onPressed,
+  });
 
   @override
   Widget build(context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: InkWell(
-        onTap: () {},
+        onTap: onPressed,
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         child: Container(
           width: 40,
@@ -16,7 +23,7 @@ class SearchButton extends StatelessWidget {
             color: Colors.white10,
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
-          child: const Icon(Icons.search_rounded),
+          child: icon,
         ),
       ),
     );
