@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/decorations.dart';
 import '../edit_note_view.dart';
 
 class NoteTile extends StatelessWidget {
@@ -10,23 +11,9 @@ class NoteTile extends StatelessWidget {
     return Card(
       margin: EdgeInsets.zero,
       color: Colors.amber,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(16),
-        ),
-      ),
+      shape: kRoundedRectangleBorder16,
       child: ListTile(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(16),
-          ),
-        ),
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const EditNoteView(),
-          ),
-        ),
+        shape: kRoundedRectangleBorder16,
         contentPadding: const EdgeInsets.all(16),
         title: const Text('Flutter tips'),
         titleTextStyle: const TextStyle(
@@ -61,6 +48,12 @@ class NoteTile extends StatelessWidget {
             size: 32,
           ),
           onPressed: () {},
+        ),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const EditNoteView(),
+          ),
         ),
       ),
     );

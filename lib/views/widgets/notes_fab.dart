@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/decorations.dart';
 import 'notes_bottom_sheet.dart';
 
 class NotesFab extends StatelessWidget {
@@ -11,11 +12,7 @@ class NotesFab extends StatelessWidget {
       onPressed: () {
         showModalBottomSheet(
           context: context,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(16),
-            ),
-          ),
+          shape: kRoundedRectangleBorder16,
           builder: (context) => const NotesBottomSheet(),
         );
       },
