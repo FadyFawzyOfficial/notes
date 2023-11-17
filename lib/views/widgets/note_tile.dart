@@ -44,7 +44,7 @@ class NoteTile extends StatelessWidget {
                 onPressed: () {},
               ),
             ),
-            Text(
+            const Text(
               'Nov 16, 2023',
               style: TextStyle(color: Colors.black45),
             ),
