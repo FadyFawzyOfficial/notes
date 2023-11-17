@@ -7,6 +7,7 @@ class MainTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool obscureText;
   final String? initialValue;
+  final int? maxLines;
 
   const MainTextFormField({
     super.key,
@@ -16,6 +17,7 @@ class MainTextFormField extends StatelessWidget {
     this.keyboardType,
     this.obscureText = false,
     this.initialValue,
+    this.maxLines,
   });
 
   @override
@@ -25,6 +27,7 @@ class MainTextFormField extends StatelessWidget {
       obscureText: obscureText,
       onSaved: onSaved,
       initialValue: initialValue,
+      maxLines: maxLines,
       validator: (value) =>
           value == null || value.isEmpty ? 'This field is required' : null,
       decoration: InputDecoration(
