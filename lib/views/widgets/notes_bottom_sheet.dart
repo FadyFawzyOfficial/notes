@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../cubits/add_note/add_note_cubit.dart';
 import 'main_elevated_button.dart';
 import 'note_form.dart';
 
@@ -29,12 +31,28 @@ class _NotesBottomSheetState extends State<NotesBottomSheet> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 32),
-              child: MainElevatedButton(
-                label: 'Add',
-                isLoading: false,
-                onPressed: () {
-                  if (isFormValid) submit();
-                },
+              child: BlocProvider(
+                create: (context) => AddNoteCubit(),
+                child: BlocConsumer<AddNoteCubit, AddNoteState>(
+                  listener: (context, state) {
+                    switch (state.addNoteStatus) {
+                      case AddNoteStatus.success:
+                        Navigator.pop(context);
+                      case AddNoteStatus.failure:
+                        debugPrint(state.message);
+                      default:
+                    }
+                  },
+                  builder: (context, state) {
+                    return MainElevatedButton(
+                      label: 'Add',
+                      isLoading: state.addNoteStatus == AddNoteStatus.loading,
+                      onPressed: () {
+                        if (isFormValid) submit();
+                      },
+                    );
+                  },
+                ),
               ),
             ),
           ],
