@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../cubits/add_note/add_note_cubit.dart';
+import '../../models/note.dart';
 import 'main_elevated_button.dart';
 import 'note_form.dart';
 
@@ -48,7 +49,16 @@ class _NotesBottomSheetState extends State<NotesBottomSheet> {
                       label: 'Add',
                       isLoading: state.addNoteStatus == AddNoteStatus.loading,
                       onPressed: () {
-                        if (isFormValid) submit();
+                        if (isFormValid) {
+                          final note = Note(
+                            title: titleController.text,
+                            description: descriptionController.text,
+                            date: DateTime.now().toString(),
+                            color: Colors.amberAccent.value,
+                          );
+
+                          context.read<AddNoteCubit>().addNote(note: note);
+                        }
                       },
                     );
                   },
@@ -68,10 +78,5 @@ class _NotesBottomSheetState extends State<NotesBottomSheet> {
 
     form.save();
     return true;
-  }
-
-  void submit() {
-    debugPrint(titleController.text);
-    debugPrint(descriptionController.text);
   }
 }
