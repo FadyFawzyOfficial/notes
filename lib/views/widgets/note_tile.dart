@@ -51,7 +51,7 @@ class NoteTile extends StatelessWidget {
             color: Colors.black,
             size: 32,
           ),
-          onPressed: () {},
+          onPressed: () => note.delete(),
         ),
         onTap: () => Navigator.push(
           context,
