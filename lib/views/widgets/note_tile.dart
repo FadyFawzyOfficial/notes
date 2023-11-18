@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constants/decorations.dart';
+import '../../cubits/notes/notes_cubit.dart';
 import '../../models/note.dart';
 import '../edit_note_view.dart';
 
@@ -51,7 +53,10 @@ class NoteTile extends StatelessWidget {
             color: Colors.black,
             size: 32,
           ),
-          onPressed: () => note.delete(),
+          onPressed: () {
+            note.delete();
+            context.read<NotesCubit>().getNotes();
+          },
         ),
         onTap: () => Navigator.push(
           context,
