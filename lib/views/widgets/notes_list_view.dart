@@ -9,18 +9,15 @@ class NotesListView extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return BlocProvider(
-      create: (context) => NotesCubit()..getNotes(),
-      child: BlocBuilder<NotesCubit, NotesState>(
-        builder: (context, state) {
-          return ListView.separated(
-            padding: const EdgeInsets.all(16),
-            itemCount: state.notes.length,
-            itemBuilder: (context, index) => NoteTile(note: state.notes[index]),
-            separatorBuilder: (context, index) => const SizedBox(height: 8),
-          );
-        },
-      ),
+    return BlocBuilder<NotesCubit, NotesState>(
+      builder: (context, state) {
+        return ListView.separated(
+          padding: const EdgeInsets.all(16),
+          itemCount: state.notes.length,
+          itemBuilder: (context, index) => NoteTile(note: state.notes[index]),
+          separatorBuilder: (context, index) => const SizedBox(height: 8),
+        );
+      },
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../cubits/add_note/add_note_cubit.dart';
+import '../../cubits/notes/notes_cubit.dart';
 import '../../extensions/date_formatter.dart';
 import '../../models/note.dart';
 import 'main_elevated_button.dart';
@@ -43,6 +44,7 @@ class _NotesBottomSheetState extends State<NotesBottomSheet> {
                 listener: (context, state) {
                   switch (state.addNoteStatus) {
                     case AddNoteStatus.success:
+                      context.read<NotesCubit>().getNotes();
                       Navigator.pop(context);
                     case AddNoteStatus.failure:
                       debugPrint(state.message);
