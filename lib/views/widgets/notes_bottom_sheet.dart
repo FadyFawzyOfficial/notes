@@ -21,52 +21,55 @@ class _NotesBottomSheetState extends State<NotesBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            NoteForm(
-              formKey: formKey,
-              titleController: titleController,
-              descriptionController: descriptionController,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 32),
-              child: BlocProvider(
-                create: (context) => AddNoteCubit(),
-                child: BlocConsumer<AddNoteCubit, AddNoteState>(
-                  listener: (context, state) {
-                    switch (state.addNoteStatus) {
-                      case AddNoteStatus.success:
-                        Navigator.pop(context);
-                      case AddNoteStatus.failure:
-                        debugPrint(state.message);
-                      default:
-                    }
-                  },
-                  builder: (context, state) {
-                    return MainElevatedButton(
-                      label: 'Add',
-                      isLoading: state.addNoteStatus == AddNoteStatus.loading,
-                      onPressed: () {
-                        if (isFormValid) {
-                          final note = Note(
-                            title: titleController.text,
-                            description: descriptionController.text,
-                            date: DateTime.now().toString(),
-                            color: Colors.amberAccent.value,
-                          );
+      padding: EdgeInsets.only(
+        top: 16,
+        left: 16,
+        right: 16,
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Column(
+        children: [
+          NoteForm(
+            formKey: formKey,
+            titleController: titleController,
+            descriptionController: descriptionController,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 32),
+            child: BlocProvider(
+              create: (context) => AddNoteCubit(),
+              child: BlocConsumer<AddNoteCubit, AddNoteState>(
+                listener: (context, state) {
+                  switch (state.addNoteStatus) {
+                    case AddNoteStatus.success:
+                      Navigator.pop(context);
+                    case AddNoteStatus.failure:
+                      debugPrint(state.message);
+                    default:
+                  }
+                },
+                builder: (context, state) {
+                  return MainElevatedButton(
+                    label: 'Add',
+                    isLoading: state.addNoteStatus == AddNoteStatus.loading,
+                    onPressed: () {
+                      if (isFormValid) {
+                        final note = Note(
+                          title: titleController.text,
+                          description: descriptionController.text,
+                          date: DateTime.now().toString(),
+                          color: Colors.amberAccent.value,
+                        );
 
-                          context.read<AddNoteCubit>().addNote(note: note);
-                        }
-                      },
-                    );
-                  },
-                ),
+                        context.read<AddNoteCubit>().addNote(note: note);
+                      }
+                    },
+                  );
+                },
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
