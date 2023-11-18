@@ -1,9 +1,16 @@
-import 'dart:convert';
+import 'package:hive/hive.dart';
 
-class Note {
+part 'note.g.dart';
+
+@HiveType(typeId: 0)
+class Note extends HiveObject {
+  @HiveField(0)
   final String title;
+  @HiveField(1)
   final String description;
+  @HiveField(2)
   final DateTime date;
+  @HiveField(3)
   final int color;
 
   Note({
@@ -12,28 +19,6 @@ class Note {
     required this.date,
     required this.color,
   });
-
-  factory Note.fromJson(String source) => Note.fromMap(json.decode(source));
-
-  factory Note.fromMap(Map<String, dynamic> map) {
-    return Note(
-      title: map['title'],
-      description: map['description'],
-      date: DateTime.fromMillisecondsSinceEpoch(map['date']),
-      color: map['color'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  Map<String, dynamic> toMap() {
-    return {
-      'title': title,
-      'description': description,
-      'date': date.millisecondsSinceEpoch,
-      'color': color,
-    };
-  }
 
   @override
   String toString() =>
