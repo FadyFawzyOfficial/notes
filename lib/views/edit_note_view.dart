@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../cubits/notes/notes_cubit.dart';
 import '../models/note.dart';
 import 'widgets/app_bar_button.dart';
 import 'widgets/note_form.dart';
@@ -21,7 +23,11 @@ class EditNoteView extends StatelessWidget {
           AppBarButton(
             icon: const Icon(Icons.check_rounded),
             onPressed: () {
-              if (isFormValid) submit();
+              if (isFormValid) {
+                editNote();
+                context.read<NotesCubit>().getNotes();
+                Navigator.pop(context);
+              }
             },
           ),
         ],
@@ -47,8 +53,9 @@ class EditNoteView extends StatelessWidget {
     return true;
   }
 
-  void submit() {
-    debugPrint(titleController.text);
-    debugPrint(descriptionController.text);
+  void editNote() {
+    note.title = titleController.text;
+    note.description = descriptionController.text;
+    note.save();
   }
 }
