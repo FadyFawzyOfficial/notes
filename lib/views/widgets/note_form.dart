@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'colors_list_view.dart';
 import 'main_text_form_field.dart';
 
 class NoteForm extends StatelessWidget {
@@ -31,15 +32,18 @@ class NoteForm extends StatelessWidget {
               titleController.text = value ?? '';
             },
           ),
-          const SizedBox(height: 16),
-          MainTextFormField(
-            maxLines: 5,
-            label: 'Content',
-            initialValue: description,
-            onSaved: (value) {
-              descriptionController.text = value ?? '';
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: MainTextFormField(
+              maxLines: 5,
+              label: 'Content',
+              initialValue: description,
+              onSaved: (value) {
+                descriptionController.text = value ?? '';
+              },
+            ),
           ),
+          const ColorsListView(),
         ],
       ),
     );
