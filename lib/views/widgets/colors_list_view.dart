@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/colors.dart';
+
 class ColorsListView extends StatefulWidget {
   final Function(Color) selectColor;
   final int? initialColor;
@@ -15,26 +17,13 @@ class ColorsListView extends StatefulWidget {
 }
 
 class _ColorsListViewState extends State<ColorsListView> {
-  static const colors = [
-    Color(0xFFFF5252), // Watermelon Red
-    Color(0xFFFFD740), // Sunflower Yellow
-    Color(0xFF4CAF50), // Mint Green
-    Color(0xFF2196F3), // Sky Blue
-    Color(0xFFFF4081), // Pink
-    Color(0xFFFF9800), // Orange
-    Color(0xFF4CAF50), // Green
-    Color(0xFFFFC107), // Yellow
-    Color(0xFF9C27B0), // Purple
-    Color(0xFF03A9F4), // Light Blue
-  ];
-
   var selectedColorIndex = 0;
 
   @override
   void initState() {
     super.initState();
     if (widget.initialColor != null) {
-      selectedColorIndex = colors.indexOf(Color(widget.initialColor!));
+      selectedColorIndex = kColorPalette.indexOf(Color(widget.initialColor!));
     }
   }
 
@@ -44,18 +33,21 @@ class _ColorsListViewState extends State<ColorsListView> {
       height: 48,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: colors.length,
-        itemBuilder: (context, index) => InkWell(
-          borderRadius: const BorderRadius.all(Radius.circular(24)),
-          onTap: () {
-            widget.selectColor(colors[index]);
-            setState(() => selectedColorIndex = index);
-          },
-          child: ColorItem(
-            color: colors[index],
-            isSelected: selectedColorIndex == index,
-          ),
-        ),
+        itemCount: kColorPalette.length,
+        itemBuilder: (context, index) {
+          final selectedColor = kColorPalette[index];
+          return InkWell(
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
+            onTap: () {
+              widget.selectColor(selectedColor);
+              setState(() => selectedColorIndex = index);
+            },
+            child: ColorItem(
+              color: selectedColor,
+              isSelected: selectedColorIndex == index,
+            ),
+          );
+        },
         separatorBuilder: (context, index) => const SizedBox(width: 8),
       ),
     );
