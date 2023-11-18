@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+import 'constants/strings.dart';
 import 'views/notes_view.dart';
 
-void main() => runApp(const App());
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox(kNotesBox);
+  runApp(const App());
+}
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -13,7 +19,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        fontFamily: 'Poppins',
+        fontFamily: kMainFontFamily,
         appBarTheme: const AppBarTheme(
           elevation: 0,
           backgroundColor: Colors.transparent,
