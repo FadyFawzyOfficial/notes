@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class ColorsListView extends StatefulWidget {
   final Function(Color) selectColor;
+  final int? initialColor;
 
   const ColorsListView({
     super.key,
     required this.selectColor,
+    this.initialColor,
   });
 
   @override
@@ -27,6 +29,14 @@ class _ColorsListViewState extends State<ColorsListView> {
   ];
 
   var selectedColorIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialColor != null) {
+      selectedColorIndex = colors.indexOf(Color(widget.initialColor!));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

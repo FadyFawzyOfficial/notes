@@ -41,6 +41,7 @@ class EditNoteView extends StatelessWidget {
           titleController: titleController,
           descriptionController: descriptionController,
           selectColor: (color) => note.color = color.value,
+          initialColor: note.color,
         ),
       ),
     );

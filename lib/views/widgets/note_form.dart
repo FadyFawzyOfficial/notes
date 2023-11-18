@@ -10,6 +10,7 @@ class NoteForm extends StatelessWidget {
   final TextEditingController titleController;
   final TextEditingController descriptionController;
   final Function(Color) selectColor;
+  final int? initialColor;
 
   const NoteForm({
     super.key,
@@ -19,6 +20,7 @@ class NoteForm extends StatelessWidget {
     required this.titleController,
     required this.descriptionController,
     required this.selectColor,
+    this.initialColor,
   });
 
   @override
@@ -45,7 +47,10 @@ class NoteForm extends StatelessWidget {
               },
             ),
           ),
-          ColorsListView(selectColor: selectColor),
+          ColorsListView(
+            selectColor: selectColor,
+            initialColor: initialColor,
+          ),
         ],
       ),
     );
