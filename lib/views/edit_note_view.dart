@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../models/note.dart';
 import 'widgets/app_bar_button.dart';
 import 'widgets/note_form.dart';
 
 class EditNoteView extends StatelessWidget {
+  final Note note;
   final formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
 
-  EditNoteView({super.key});
+  EditNoteView({super.key, required this.note});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,8 @@ class EditNoteView extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: NoteForm(
+          title: note.title,
+          description: note.description,
           formKey: formKey,
           titleController: titleController,
           descriptionController: descriptionController,
