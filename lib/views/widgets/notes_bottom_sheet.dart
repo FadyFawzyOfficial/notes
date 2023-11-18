@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../cubits/add_note/add_note_cubit.dart';
+import '../../extensions/date_formatter.dart';
 import '../../models/note.dart';
 import 'main_elevated_button.dart';
 import 'note_form.dart';
@@ -57,7 +58,7 @@ class _NotesBottomSheetState extends State<NotesBottomSheet> {
                         final note = Note(
                           title: titleController.text,
                           description: descriptionController.text,
-                          date: DateTime.now().toString(),
+                          date: DateTime.now().format(),
                           color: Colors.amberAccent.value,
                         );
 
