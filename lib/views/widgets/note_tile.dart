@@ -52,7 +52,7 @@ class NoteTile extends StatelessWidget {
         onTap: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const EditNoteView(),
+            builder: (context) => EditNoteView(),
           ),
         ),
       ),
