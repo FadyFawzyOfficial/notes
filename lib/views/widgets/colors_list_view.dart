@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ColorsListView extends StatefulWidget {
-  const ColorsListView({super.key});
+  final Function(Color) selectColor;
+
+  const ColorsListView({
+    super.key,
+    required this.selectColor,
+  });
 
   @override
   State<ColorsListView> createState() => _ColorsListViewState();
@@ -32,7 +37,10 @@ class _ColorsListViewState extends State<ColorsListView> {
         itemCount: colors.length,
         itemBuilder: (context, index) => InkWell(
           borderRadius: const BorderRadius.all(Radius.circular(24)),
-          onTap: () => setState(() => selectedColorIndex = index),
+          onTap: () {
+            widget.selectColor(colors[index]);
+            setState(() => selectedColorIndex = index);
+          },
           child: ColorItem(
             color: colors[index],
             isSelected: selectedColorIndex == index,
