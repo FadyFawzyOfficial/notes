@@ -1,32 +1,36 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/decorations.dart';
+import '../../models/note.dart';
 import '../edit_note_view.dart';
 
 class NoteTile extends StatelessWidget {
-  const NoteTile({super.key});
+  final Note note;
+
+  const NoteTile({super.key, required this.note});
 
   @override
   Widget build(context) {
     return Card(
       margin: EdgeInsets.zero,
-      color: Colors.amber,
+      color: Color(note.color),
       shape: kRoundedRectangleBorder16,
       child: ListTile(
         shape: kRoundedRectangleBorder16,
         contentPadding: const EdgeInsets.all(16),
-        title: const Text('Flutter tips'),
+        title: Text(note.title),
         titleTextStyle: const TextStyle(
           color: Colors.black,
           fontSize: 24,
         ),
-        subtitle: const Column(
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               child: Text(
-                'Build your career with Fady Fawzy',
-                style: TextStyle(
+                note.description,
+                style: const TextStyle(
                   color: Colors.black45,
                   fontSize: 20,
                 ),
@@ -35,8 +39,8 @@ class NoteTile extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: Text(
-                'Nov 16, 2023',
-                style: TextStyle(color: Colors.black45),
+                note.date,
+                style: const TextStyle(color: Colors.black45),
               ),
             ),
           ],
