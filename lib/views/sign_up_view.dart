@@ -53,10 +53,13 @@ class _SignUpViewState extends State<SignUpView> {
                 isLoading: isLoading,
                 onPressed: () async {
                   try {
+                    setState(() => isLoading = true);
                     if (isFormValid) await signUp();
+                    showSnackBar(context, 'Success');
                   } on FirebaseAuthException catch (e) {
                     showSnackBar(context, e.message);
                   }
+                  setState(() => isLoading = false);
                 },
               ),
               const SizedBox(height: 8),
