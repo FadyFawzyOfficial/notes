@@ -1,13 +1,13 @@
 import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import '../../models/enum_values.dart';
 
 part 'auth_state.dart';
 
-class AuthCubit extends Cubit<AuthState> {
+class AuthCubit extends HydratedCubit<AuthState> {
   AuthCubit() : super(AuthState.initial());
 
   void signUp({required String email, required String password}) async {
@@ -61,4 +61,11 @@ class AuthCubit extends Cubit<AuthState> {
       );
     }
   }
+
+  @override
+  AuthState? fromJson(Map<String, dynamic> json) => AuthState.fromMap(json);
+
+  @override
+  Map<String, dynamic>? toJson(AuthState state) =>
+      state.authStatus == AuthStatus.authenticated ? state.toMap() : null;
 }
