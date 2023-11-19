@@ -20,33 +20,18 @@ class _SignUpViewState extends State<SignUpView> {
   @override
   Widget build(context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Form(
-          key: _formKey,
+      appBar: AppBar(title: const Text('Notes App')),
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 80),
-                child: Column(
-                  children: [
-                    // Image.asset(kLogo),
-                    Text(
-                      'Notes',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontFamily: 'Pacifico',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Sign Up',
-                  style: TextStyle(fontSize: 24),
-                ),
+              const Text(
+                'Sign Up',
+                style: TextStyle(fontSize: 24),
               ),
               const SizedBox(height: 24),
               MainTextFormField(
