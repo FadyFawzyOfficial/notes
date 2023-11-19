@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes/cubits/auth/auth_cubit.dart';
-import 'package:notes/views/widgets/main_elevated_button.dart';
+
+import '../cubits/auth/auth_cubit.dart';
+import '../cubits/notes/notes_cubit.dart';
+import 'widgets/main_elevated_button.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -21,8 +23,12 @@ class ProfileView extends StatelessWidget {
           ),
           MainElevatedButton(
             label: 'Sign Out',
-            isLoading: false,
-            onPressed: () {},
+            onPressed: () {
+              context
+                  .read<NotesCubit>()
+                  .clear()
+                  .then((_) => context.read<AuthCubit>().signOut());
+            },
           ),
         ],
       ),

@@ -31,4 +31,9 @@ class NotesCubit extends Cubit<NotesState> {
       emit(state.copyWith(notesStatus: NotesStatus.failure, message: '$e'));
     }
   }
+
+  Future<void> clear() async {
+    await Hive.box<Note>(kNotesBox).clear();
+    getNotes();
+  }
 }
