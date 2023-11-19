@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/strings.dart';
+import '../utilities/snack_bar_shower.dart';
 import 'widgets/main_elevated_button.dart';
 import 'widgets/main_text_form_field.dart';
 
@@ -50,7 +52,16 @@ class _SignInViewState extends State<SignInView> {
               MainElevatedButton(
                 label: 'Sign In',
                 isLoading: isLoading,
-                onPressed: () {},
+                onPressed: () async {
+                  try {
+                    setState(() => isLoading = true);
+                    if (isFormValid) await signIn();
+                    showSnackBar(context, 'Success');
+                  } on FirebaseAuthException catch (e) {
+                    showSnackBar(context, e.message);
+                  }
+                  setState(() => isLoading = false);
+                },
               ),
               const SizedBox(height: 8),
               Row(
@@ -76,5 +87,12 @@ class _SignInViewState extends State<SignInView> {
 
     form.save();
     return true;
+  }
+
+  Future<void> signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
   }
 }
