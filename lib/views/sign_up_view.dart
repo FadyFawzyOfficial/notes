@@ -49,7 +49,10 @@ class _SignUpViewState extends State<SignUpView> {
               MainElevatedButton(
                 label: 'Sign Up',
                 isLoading: isLoading,
-                onPressed: () {},
+                onPressed: () {
+                  debugPrint(email);
+                  debugPrint(password);
+                },
               ),
               const SizedBox(height: 8),
               Row(

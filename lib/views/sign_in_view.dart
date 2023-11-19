@@ -50,7 +50,10 @@ class _SignInViewState extends State<SignInView> {
               MainElevatedButton(
                 label: 'Sign In',
                 isLoading: isLoading,
-                onPressed: () {},
+                onPressed: () {
+                  debugPrint(email);
+                  debugPrint(password);
+                },
               ),
               const SizedBox(height: 8),
               Row(
