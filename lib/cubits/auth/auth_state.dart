@@ -7,6 +7,13 @@ enum AuthStatus {
   authenticated,
 }
 
+final authStatusValues = EnumValues({
+  "unAuthenticated": AuthStatus.unAuthenticated,
+  "loading": AuthStatus.loading,
+  "failure": AuthStatus.failure,
+  "authenticated": AuthStatus.authenticated,
+});
+
 class AuthState {
   final AuthStatus authStatus;
   final String message;
@@ -41,4 +48,25 @@ class AuthState {
   @override
   String toString() =>
       'AuthState(authStatus: $authStatus, message: $message, email: $email)';
+
+  Map<String, dynamic> toMap() {
+    return {
+      'authStatus': authStatusValues.reverse[authStatus],
+      'message': message,
+      'email': email,
+    };
+  }
+
+  factory AuthState.fromMap(Map<String, dynamic> map) {
+    return AuthState(
+      authStatus: authStatusValues.map[map['authStatus']]!,
+      message: map['message'],
+      email: map['email'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory AuthState.fromJson(String source) =>
+      AuthState.fromMap(json.decode(source));
 }
