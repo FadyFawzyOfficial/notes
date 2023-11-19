@@ -7,6 +7,8 @@ import 'cubits/notes/notes_cubit.dart';
 import 'models/note.dart';
 import 'simple_bloc_observer.dart';
 import 'views/notes_view.dart';
+import 'views/sign_in_view.dart';
+import 'views/sign_up_view.dart';
 
 void main() async {
   Bloc.observer = SimpleBlocObserver();
@@ -31,9 +33,15 @@ class App extends StatelessWidget {
           appBarTheme: const AppBarTheme(
             elevation: 0,
             backgroundColor: Colors.transparent,
+            centerTitle: true,
           ),
         ),
-        home: const NotesView(),
+        routes: {
+          kSignInView: (context) => const SignInView(),
+          kSignUpView: (context) => const SignUpView(),
+          kHomeView: (context) => const NotesView(),
+        },
+        home: const SignInView(),
       ),
     );
   }
