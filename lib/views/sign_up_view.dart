@@ -1,6 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../constants/strings.dart';
+import '../cubits/auth/auth_cubit.dart';
 import '../utilities/snack_bar_shower.dart';
 import 'widgets/main_elevated_button.dart';
 import 'widgets/main_text_form_field.dart';
@@ -17,7 +19,6 @@ class _SignUpViewState extends State<SignUpView> {
 
   var email = '';
   var password = '';
-  var isLoading = false;
 
   @override
   Widget build(context) {
@@ -48,18 +49,31 @@ class _SignUpViewState extends State<SignUpView> {
                 onSaved: (value) => password = value ?? '',
               ),
               const SizedBox(height: 24),
-              MainElevatedButton(
-                label: 'Sign Up',
-                isLoading: isLoading,
-                onPressed: () async {
-                  try {
-                    setState(() => isLoading = true);
-                    if (isFormValid) await signUp();
-                    showSnackBar(context, 'Success');
-                  } on FirebaseAuthException catch (e) {
-                    showSnackBar(context, e.message);
+              BlocConsumer<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if (state.authStatus == AuthStatus.authenticated) {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      kHomeView,
+                      (route) => false,
+                    );
+                    showSnackBar(context, 'User has been authenticated');
+                  } else if (state.authStatus == AuthStatus.failure) {
+                    showSnackBar(context, state.message);
                   }
-                  setState(() => isLoading = false);
+                },
+                builder: (context, state) {
+                  return MainElevatedButton(
+                    label: 'Sign Up',
+                    isLoading: state.authStatus == AuthStatus.loading,
+                    onPressed: () {
+                      if (isFormValid) {
+                        context
+                            .read<AuthCubit>()
+                            .signUp(email: email, password: password);
+                      }
+                    },
+                  );
                 },
               ),
               const SizedBox(height: 8),
@@ -86,12 +100,5 @@ class _SignUpViewState extends State<SignUpView> {
 
     form.save();
     return true;
-  }
-
-  Future<void> signUp() async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
   }
 }
