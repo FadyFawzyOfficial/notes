@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'constants/strings.dart';
+import 'cubits/auth/auth_cubit.dart';
 import 'cubits/notes/notes_cubit.dart';
 import 'firebase_options.dart';
 import 'models/note.dart';
@@ -27,8 +28,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return BlocProvider(
-      create: (context) => NotesCubit()..getNotes(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NotesCubit()..getNotes(),
+        ),
+        BlocProvider(
+          create: (context) => AuthCubit(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
