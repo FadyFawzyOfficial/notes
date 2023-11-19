@@ -50,7 +50,6 @@ class _SignInViewState extends State<SignInView> {
                 listener: (context, state) {
                   if (state.authStatus == AuthStatus.authenticated) {
                     showSnackBar(context, 'User has been authenticated');
-                    Navigator.pushReplacementNamed(context, kHomeView);
                   } else if (state.authStatus == AuthStatus.failure) {
                     showSnackBar(context, state.message);
                   }

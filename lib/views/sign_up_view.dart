@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../constants/strings.dart';
 import '../cubits/auth/auth_cubit.dart';
-import '../utilities/snack_bar_shower.dart';
 import 'widgets/main_elevated_button.dart';
 import 'widgets/main_text_form_field.dart';
 
@@ -52,14 +50,7 @@ class _SignUpViewState extends State<SignUpView> {
               BlocConsumer<AuthCubit, AuthState>(
                 listener: (context, state) {
                   if (state.authStatus == AuthStatus.authenticated) {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      kHomeView,
-                      (route) => false,
-                    );
-                    showSnackBar(context, 'User has been authenticated');
-                  } else if (state.authStatus == AuthStatus.failure) {
-                    showSnackBar(context, state.message);
+                    Navigator.pop(context);
                   }
                 },
                 builder: (context, state) {

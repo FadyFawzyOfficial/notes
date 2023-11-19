@@ -42,23 +42,29 @@ class App extends StatelessWidget {
           create: (context) => AuthCubit(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          fontFamily: kMainFontFamily,
-          appBarTheme: const AppBarTheme(
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            centerTitle: true,
-          ),
-        ),
-        routes: {
-          kSignInView: (context) => const SignInView(),
-          kSignUpView: (context) => const SignUpView(),
-          kHomeView: (context) => const NotesView(),
+      child: BlocBuilder<AuthCubit, AuthState>(
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              brightness: Brightness.dark,
+              fontFamily: kMainFontFamily,
+              appBarTheme: const AppBarTheme(
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+                centerTitle: true,
+              ),
+            ),
+            routes: {
+              kSignInView: (context) => const SignInView(),
+              kSignUpView: (context) => const SignUpView(),
+              kHomeView: (context) => const NotesView(),
+            },
+            home: state.authStatus == AuthStatus.authenticated
+                ? const NotesView()
+                : const SignInView(),
+          );
         },
-        home: const SignInView(),
       ),
     );
   }
