@@ -1,9 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'constants/strings.dart';
 import 'cubits/notes/notes_cubit.dart';
+import 'firebase_options.dart';
 import 'models/note.dart';
 import 'simple_bloc_observer.dart';
 import 'views/notes_view.dart';
@@ -11,6 +13,8 @@ import 'views/sign_in_view.dart';
 import 'views/sign_up_view.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Bloc.observer = SimpleBlocObserver();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteAdapter());
