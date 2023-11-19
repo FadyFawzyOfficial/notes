@@ -15,7 +15,18 @@ class MainElevatedButton extends StatelessWidget {
   @override
   Widget build(context) {
     return isLoading
-        ? const CircularProgressIndicator.adaptive()
+        ? Center(
+            child: Container(
+              height: 48,
+              width: 48,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              child: const CircularProgressIndicator(color: Colors.white),
+            ),
+          )
         : ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
