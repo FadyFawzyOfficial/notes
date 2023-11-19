@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../constants/strings.dart';
 import 'widgets/main_elevated_button.dart';
 import 'widgets/main_text_form_field.dart';
 
@@ -20,32 +21,18 @@ class _SignInViewState extends State<SignInView> {
   @override
   Widget build(context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Form(
-          key: _formKey,
+      appBar: AppBar(title: const Text('Notes App')),
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 80),
-                child: Column(
-                  children: [
-                    Text(
-                      'Scholar Chat',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontFamily: 'Pacifico',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Sign In',
-                  style: TextStyle(fontSize: 24),
-                ),
+              const Text(
+                'Sign In',
+                style: TextStyle(fontSize: 24),
               ),
               const SizedBox(height: 24),
               MainTextFormField(
@@ -71,7 +58,7 @@ class _SignInViewState extends State<SignInView> {
                 children: [
                   const Text('Don\'t have an account?'),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => Navigator.pushNamed(context, kSignUpView),
                     child: const Text('Sign Up'),
                   ),
                 ],
