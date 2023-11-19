@@ -39,38 +39,34 @@ class _NotesBottomSheetState extends State<NotesBottomSheet> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 32),
-            child: BlocProvider(
-              create: (context) => NotesCubit(),
-              child: BlocConsumer<NotesCubit, NotesState>(
-                listener: (context, state) {
-                  switch (state.notesStatus) {
-                    case NotesStatus.success:
-                      context.read<NotesCubit>().getNotes();
-                      Navigator.pop(context);
-                    case NotesStatus.failure:
-                      debugPrint(state.message);
-                    default:
-                  }
-                },
-                builder: (context, state) {
-                  return MainElevatedButton(
-                    label: 'Add',
-                    isLoading: state.notesStatus == NotesStatus.loading,
-                    onPressed: () {
-                      if (isFormValid) {
-                        final note = Note(
-                          title: titleController.text,
-                          description: descriptionController.text,
-                          date: DateTime.now().format(),
-                          color: selectedColor,
-                        );
+            child: BlocConsumer<NotesCubit, NotesState>(
+              listener: (context, state) {
+                switch (state.notesStatus) {
+                  case NotesStatus.success:
+                    Navigator.pop(context);
+                  case NotesStatus.failure:
+                    debugPrint(state.message);
+                  default:
+                }
+              },
+              builder: (context, state) {
+                return MainElevatedButton(
+                  label: 'Add',
+                  isLoading: state.notesStatus == NotesStatus.loading,
+                  onPressed: () {
+                    if (isFormValid) {
+                      final note = Note(
+                        title: titleController.text,
+                        description: descriptionController.text,
+                        date: DateTime.now().format(),
+                        color: selectedColor,
+                      );
 
-                        context.read<NotesCubit>().addNote(note: note);
-                      }
-                    },
-                  );
-                },
-              ),
+                      context.read<NotesCubit>().addNote(note: note);
+                    }
+                  },
+                );
+              },
             ),
           ),
         ],
